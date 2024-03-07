@@ -1,0 +1,324 @@
+fileFormatVersion: 2
+guid: 628016aacf04f394ab279c08eeb40c0e
+ModelImporter:
+  serializedVersion: 22200
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Afghanistan_Cube.025Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alaska_Cube.001Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Alberta_Cube.003Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Argentina_Cube.018Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brazil_Cube.016Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Central_America_Cube.006Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: China_Cube.041Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Congo_Cube.057Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: East_Africa_Cube.059Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eastern_Australia_rm_rm_Cube.022Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Eastern_United_States_Cube.012Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Egypt_Cube.055Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Great_Britain_Cube.063Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Greenland_Cube.065Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Iceland_Cube.008Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: India_Cube.036Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Indonesua_Cube.010Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Irkutsk_Cube.043Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Japan_Cube.064Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kamchatka_Cube.049Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Madagascar_Cube.014Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Middle_East_Cube.034Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mongolia_Cube.042Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: New_Guinea_Cube.013Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: North_Africa_Cube.056Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: North_West_Territory_Cube.002Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Northern_Europe_Cube.026Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ontario_Cube.009Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Peru_Cube.007Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Quebec_Cube.011Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Scandinavia_Cube.021Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Siam_Cube.053Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Siberia_Cube.038Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: South_Africa_Cube.058Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Southern_Europe_Cube.028Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ukraine_Cube.020Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ural_Cube.023Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Venezuela_Cube.004Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Water_PlaneMat
+    second: {fileID: 2100000, guid: a18ee3dfc48ae02459c82f60868b9883, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Western_Australia_Cube.017Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Western_Europe_Cube.027Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Western_United_States_Cube.005Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Yakutsk_Cube.045Mat
+    second: {fileID: 2100000, guid: 80c7fb76b66fa414f9307dd9320aa4a3, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importPhysicalCameras: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    strictVertexDataChecks: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
