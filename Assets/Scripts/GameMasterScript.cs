@@ -18,6 +18,10 @@ public class GameMasterScript : MonoBehaviour
     private GAME_STATE gameState = GAME_STATE.DRAFT;
     private int playersTurn = 0;
     private PlayerScript[] playerArr;
+    private CountryScript[] countryArr;
+
+    public SelectionHandler SelectionHandler;
+    public TroopSelectScript TroopSelectScript;
 
     private void Awake()
     {
@@ -31,9 +35,29 @@ public class GameMasterScript : MonoBehaviour
         }
 
         playerArr = transform.Find("Players").GetComponentsInChildren<PlayerScript>();
+        List<CountryScript> temp = new List<CountryScript>();
+        Transform conts = transform.Find("Continents");
+        for (int i = 0; i<conts.childCount; i++)
+        {
+            temp.AddRange(conts.GetComponentsInChildren<CountryScript>());
+        }
+        countryArr = temp.ToArray();
+
+        SelectionHandler = GetComponent<SelectionHandler>();
+        TroopSelectScript = GetComponent<TroopSelectScript>();
     }
 
-    public Material GetPlayerMat(int playerID) { return playerArr[playerID].playerMat; }
+    public void GameStart()
+    {
+        if (ActionAfterTurnChange != null) ActionAfterTurnChange();
+    }
+
+    public CountryScript[] getAllCountries()
+    {
+        return countryArr;
+    }
+
+    public Color GetPlayerColor(int playerID) { return playerArr[playerID].playerColor; }
 
     public PlayerScript GetCurrentPlayer() { return playerArr[playersTurn]; }
 

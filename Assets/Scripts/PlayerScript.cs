@@ -6,12 +6,12 @@ using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
     public string playerName;
-    public Material playerMat;
+    public Color playerColor;
     public GameObject playerUI;
     public Sprite playerSprite;
 
     private void Start()
     {
-        playerUI.transform.Find("Background").GetComponent<Image>().color = playerMat.color;
+        playerUI.transform.Find("Background").GetComponent<Image>().color = playerColor;
     }
 }

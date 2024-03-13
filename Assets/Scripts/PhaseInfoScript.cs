@@ -28,8 +28,10 @@ public class PhaseInfoScript : MonoBehaviour
     private void PhaseChange()
     {
         ResetUI();
-        Color playerColor = GameMasterScript.Instance.GetPlayerMat(GameMasterScript.Instance.getPlayersTurn()).color;
+        Color playerColor = GameMasterScript.Instance.GetPlayerColor(GameMasterScript.Instance.getPlayersTurn());
         transform.Find("Background").GetComponent<Image>().color = playerColor;
+        transform.Find("NextPhase").GetComponent<Image>().color = playerColor;
+        transform.Find("NextPhase").GetChild(0).GetComponent<Image>().color = playerColor;
         switch(GameMasterScript.Instance.getGameState())
         {
             case GAME_STATE.DRAFT:
