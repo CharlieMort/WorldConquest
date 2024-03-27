@@ -21,7 +21,7 @@ public class CountryScript : MonoBehaviour
         nameTextObject.text = countryName;
 
         troopCountText = transform.Find("Canvas").Find("TroopCount").GetChild(0).GetComponent<TextMeshProUGUI>();
-        AddTroops(0);
+        AddTroops(Mathf.FloorToInt(Random.Range(1f, 10f)));
 
         countryMat = transform.Find("CountryModel").GetComponent<MeshRenderer>().material;
         if (ownerID != -1) ChangeOwner(ownerID);
@@ -41,12 +41,12 @@ public class CountryScript : MonoBehaviour
 
     public void Highlight()
     {
-        ChangeOwner(ownerID);
+        countryMat.SetColor("_EmissionColor", countryMat.color);
     }
 
     public void Darken()
     {
-        Color x = GameMasterScript.Instance.GetPlayerColor(ownerID) - new Color(0.4f, 0.4f, 0.4f);
-        countryMat.color = x;
+        countryMat.color = GameMasterScript.Instance.GetPlayerColor(ownerID);
+        countryMat.SetColor("_EmissionColor", countryMat.color * -.5f);
     }
 }
