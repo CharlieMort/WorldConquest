@@ -41,12 +41,11 @@ public class CountryScript : MonoBehaviour
 
     public void Highlight()
     {
-        countryMat.SetColor("_EmissionColor", countryMat.color);
+        countryMat.color = GameMasterScript.Instance.GetPlayerColor(ownerID);
     }
 
     public void Darken()
     {
-        countryMat.color = GameMasterScript.Instance.GetPlayerColor(ownerID);
-        countryMat.SetColor("_EmissionColor", countryMat.color * -.5f);
+        countryMat.color = GameMasterScript.Instance.GetPlayerColor(ownerID) * 0.5f;
     }
 }
