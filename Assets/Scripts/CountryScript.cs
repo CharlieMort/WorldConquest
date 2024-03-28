@@ -31,6 +31,7 @@ public class CountryScript : MonoBehaviour
     {
         ownerID = playerID;
         countryMat.color = GameMasterScript.Instance.GetPlayerColor(playerID);
+        transform.Find("Canvas").Find("TroopCount").GetComponent<MeshRenderer>().material.color = countryMat.color;
     }
 
     public void AddTroops(int num)
