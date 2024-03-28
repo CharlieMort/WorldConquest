@@ -17,6 +17,7 @@ public class AttackHandlerScript : MonoBehaviour
     private void Start()
     {
         GameMasterScript.Instance.ActionAfterPhaseChange += BeginAttack;
+        GameMasterScript.Instance.ActionBeforePhaseChange += EndAttack;
     }
 
     private void BeginAttack()
@@ -27,6 +28,15 @@ public class AttackHandlerScript : MonoBehaviour
             GameMasterScript.Instance.SelectionHandler.ActionAfterCountrySelect1 += SelectCountry;
             UpdateCountries();
             playerGetsCard = false;
+        }
+    }
+
+    private void EndAttack()
+    {
+        if (GameMasterScript.Instance.getGameState() == GAME_STATE.ATTACK)
+        {
+            CancelAttack();
+            GameMasterScript.Instance.SelectionHandler.ActionAfterCountrySelect1 -= SelectCountry;
         }
     }
 

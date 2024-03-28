@@ -66,8 +66,11 @@ public class GameMasterScript : MonoBehaviour
     public int getPlayersTurn() {  return playersTurn; }
 
     public Action ActionAfterPhaseChange;
+    public Action ActionBeforePhaseChange;
     public void NextPhaseMethod()
     {
+        if (ActionBeforePhaseChange != null) ActionBeforePhaseChange();
+
         switch(gameState)
         {
             case GAME_STATE.DRAFT:
