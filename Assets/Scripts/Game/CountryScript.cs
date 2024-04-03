@@ -21,10 +21,8 @@ public class CountryScript : MonoBehaviour
         nameTextObject.text = countryName;
 
         troopCountText = transform.Find("Canvas").Find("TroopCount").GetChild(0).GetComponent<TextMeshProUGUI>();
-        AddTroops(Mathf.FloorToInt(Random.Range(1f, 10f)));
 
         countryMat = transform.Find("CountryModel").GetComponent<MeshRenderer>().material;
-        if (ownerID != -1) ChangeOwner(ownerID);
     }
 
     public void ChangeOwner(int playerID)

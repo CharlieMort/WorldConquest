@@ -41,7 +41,7 @@ public class TroopSelectScript : MonoBehaviour
 
     public void OnValueChange()
     {
-        int num = Mathf.FloorToInt(troopMin + (slider.value - 0) * (troopMax - troopMin));
+        int num = Mathf.RoundToInt(troopMin + (slider.value - 0) * (troopMax - troopMin));
         troopNum.text = num.ToString();
         troopCount = num;
     }

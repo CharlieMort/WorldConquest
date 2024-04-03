@@ -22,6 +22,7 @@ public class GameMasterScript : MonoBehaviour
 
     public SelectionHandler SelectionHandler;
     public TroopSelectScript TroopSelectScript;
+    private GameSetupScript gameSetupScript;
 
     private void Awake()
     {
@@ -36,19 +37,18 @@ public class GameMasterScript : MonoBehaviour
 
         playerArr = transform.Find("Players").GetComponentsInChildren<PlayerScript>();
         List<CountryScript> temp = new List<CountryScript>();
-        Transform conts = transform.Find("Continents");
-        for (int i = 0; i<conts.childCount; i++)
-        {
-            temp.AddRange(conts.GetComponentsInChildren<CountryScript>());
-        }
+        temp.AddRange(transform.Find("Continents").GetComponentsInChildren<CountryScript>());
         countryArr = temp.ToArray();
+        print(countryArr.Length);
 
         SelectionHandler = GetComponent<SelectionHandler>();
         TroopSelectScript = GetComponent<TroopSelectScript>();
+        gameSetupScript = GetComponent<GameSetupScript>();
     }
 
     public void GameStart()
     {
+        gameSetupScript.AutoSetup(countryArr, playerArr.Length);
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
 

@@ -125,7 +125,7 @@ public class AttackHandlerScript : MonoBehaviour
             attackDice.Reverse();
             defendingDice.Sort();
             defendingDice.Reverse();
-
+            print("Rolling...");
             for (int i = 0; i < defendingDice.Count; i++)
             {
                 if (defendingDice[i] >= attackDice[i])
