@@ -20,6 +20,9 @@ public class AttackHandlerScript : MonoBehaviour
         GameMasterScript.Instance.ActionBeforePhaseChange += EndAttack;
     }
 
+    bool finishedRolling = false;
+    int aDiceNum = 0;
+
     private void BeginAttack()
     {
         if (GameMasterScript.Instance.getGameState() == GAME_STATE.ATTACK)
@@ -88,79 +91,72 @@ public class AttackHandlerScript : MonoBehaviour
 
                 // DO THE BIG ARROW THAT SIGNIFIES ITS ATTACKING ONE COUNTRY FROM ANOTHER
 
-                switch (attackingCountry.troopCount)
-                {
-                    case 0:
-                        Debug.LogError("COUNTRY SELECTED HAS ZERO TROOPS.... this shouldnt happen");
-                        break;
-                    case 1:
-                        Debug.LogError("COUNTRY SELECTED HAS ONE TROOP.... this shouldnt happen");
-                        break;
-                    case 2:
-                        attackUI.transform.GetChild(1).gameObject.SetActive(false);
-                        attackUI.transform.GetChild(2).gameObject.SetActive(false);
-                        break;
-                    case 3:
-                        attackUI.transform.GetChild(2).gameObject.SetActive(true);
-                        break;
-                }
+                ShowUI();
             }
+        }
+    }
+
+    void ShowUI()
+    {
+        switch (attackingCountry.troopCount)
+        {
+            case 0:
+                Debug.LogError("COUNTRY SELECTED HAS ZERO TROOPS.... this shouldnt happen");
+                break;
+            case 1:
+                Debug.LogError("COUNTRY SELECTED HAS ONE TROOP.... this shouldnt happen");
+                break;
+            case 2:
+                attackUI.transform.GetChild(1).gameObject.SetActive(false);
+                attackUI.transform.GetChild(2).gameObject.SetActive(false);
+                break;
+            case 3:
+                attackUI.transform.GetChild(2).gameObject.SetActive(true);
+                break;
         }
     }
 
     public void Attack(int numOfDice)
     {
-        if (defendingCountry != null)
+        aDiceNum = numOfDice;
+        int dDiceNum = defendingCountry.troopCount;
+        if (dDiceNum > 1) dDiceNum = 2;
+        else dDiceNum = 1;
+        GameMasterScript.Instance.DiceHandlerScript.ThrowDice(numOfDice, dDiceNum);
+        GameMasterScript.Instance.DiceHandlerScript.ActionAfterDiceRoll += HandleAttack;
+        foreach(CountryScript cunt in attackableCountrys)
         {
-            List<int> attackDice = new List<int>();
-            List<int> defendingDice = new List<int>();
-            for (int i = 0; i < numOfDice; i++) { 
-                attackDice.Add(Random.Range(1, 7));
-            }
-            for (int i = 0; i < (defendingCountry.troopCount >= 2 ? 2 : defendingCountry.troopCount); i++) { 
-                defendingDice.Add(Random.Range(1, 7)); 
-            }
-
-            attackDice.Sort();
-            attackDice.Reverse();
-            defendingDice.Sort();
-            defendingDice.Reverse();
-            print("Rolling...");
-            for (int i = 0; i < defendingDice.Count; i++)
+            if (cunt != defendingCountry)
             {
-                if (defendingDice[i] >= attackDice[i])
-                {
-                    print("Defender Wins " + defendingDice[i] + " - " + attackDice[i]);
-                    attackingCountry.AddTroops(-1);
-                    switch(attackingCountry.troopCount)
-                    {
-                        case 1:
-                            CancelAttack();
-                            break;
-                        case 2:
-                            attackUI.transform.GetChild(1).gameObject.SetActive(false);
-                            break;
-                        case 3:
-                            attackUI.transform.GetChild(2).gameObject.SetActive(true);
-                            break;
-                    }
-                }
-                else
-                {
-                    print("Attacker Wins " + attackDice[i] + " - " + defendingDice[i]);
-                    defendingCountry.AddTroops(-1);
-                    
-                    // ATTACKER WON THE BATTLE
-                    if (defendingCountry.troopCount <= 0)
-                    {
-                        attackUI.SetActive(false);
-                        defendingCountry.ChangeOwner(attackingCountry.ownerID);
-                        GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(numOfDice, attackingCountry.troopCount-1);
-                        GameMasterScript.Instance.TroopSelectScript.Show();
-                        GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm += MoveTroopsToInvaded;
-                    }
-                }
+                cunt.Darken();
             }
+        }
+        attackUI.SetActive(false);
+    }
+
+    public void HandleAttack(int[] outcomes)
+    {
+        attackUI.SetActive(true);
+        GameMasterScript.Instance.DiceHandlerScript.ActionAfterDiceRoll -= HandleAttack;
+        foreach(int outcome in outcomes)
+        {
+            if (outcome == 0) // Attacker wins that roll
+            {
+                defendingCountry.AddTroops(-1);
+            }
+            else if (outcome == 1) // Defender wins
+            {
+                attackingCountry.AddTroops(-1);
+                ShowUI();
+            }
+        }
+        if (defendingCountry.troopCount <= 0) // Attacker won the battle
+        {
+            attackUI.SetActive(false);
+            defendingCountry.ChangeOwner(attackingCountry.ownerID);
+            GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount - 1);
+            GameMasterScript.Instance.TroopSelectScript.Show();
+            GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm += MoveTroopsToInvaded;
         }
     }
 

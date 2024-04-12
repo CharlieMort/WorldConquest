@@ -15,6 +15,7 @@ public class TroopSelectScript : MonoBehaviour
     private int troopMin = 1;
     private int troopMax = 10;
     private int troopCount = 0;
+    bool finisedRolling;
 
     private void Start()
     {

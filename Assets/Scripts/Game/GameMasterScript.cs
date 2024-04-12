@@ -22,6 +22,7 @@ public class GameMasterScript : MonoBehaviour
 
     public SelectionHandler SelectionHandler;
     public TroopSelectScript TroopSelectScript;
+    public DiceHandlerScript DiceHandlerScript;
     private GameSetupScript gameSetupScript;
 
     private void Awake()

@@ -31,6 +31,8 @@ public class DraftHandlerScript : MonoBehaviour
     {
         playerNum = GameMasterScript.Instance.getPlayersTurn();
 
+        // TODO: if player dead lol
+
         int cAmt = 0;
         foreach (CountryScript country in GameMasterScript.Instance.getAllCountries()) 
         {
