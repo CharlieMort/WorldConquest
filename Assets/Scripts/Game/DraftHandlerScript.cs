@@ -19,6 +19,7 @@ public class DraftHandlerScript : MonoBehaviour
     private TextMeshProUGUI popupDesc;
     private TextMeshProUGUI troopsLeftText;
 
+    // Subscribes to events and puts components into variables
     private void Start()
     {
         GameMasterScript.Instance.ActionAfterTurnChange += BeginDraft;
@@ -27,6 +28,8 @@ public class DraftHandlerScript : MonoBehaviour
         troopsLeftText = nextPhaseButton.transform.Find("TroopsLeft").GetComponent<TextMeshProUGUI>();
     }
 
+    // Triggers at the beginning of each draft phase
+    // Setups everything and highlights all the players countries
     public void BeginDraft() 
     {
         playerNum = GameMasterScript.Instance.getPlayersTurn();
@@ -46,10 +49,13 @@ public class DraftHandlerScript : MonoBehaviour
 
         int numOfCountries = Mathf.Max((int)Mathf.Floor(cAmt / 3), 3);
         TroopsAwarded = numOfCountries;
-        // TODO: contintent bonus
+        foreach(ContinentScript continent in GameMasterScript.Instance.GetComponentsInChildren<ContinentScript>())
+        {
+            TroopsAwarded += continent.GiveTroopBonus(playerNum);
+        }
 
         popupName.text = "Player " + (playerNum + 1) + "'s Turn";
-        popupDesc.text = "+"+numOfCountries+" from owning "+cAmt+" countries";
+        popupDesc.text = "+"+numOfCountries+" from owning "+cAmt+ " countries" + "\n+" + (TroopsAwarded-numOfCountries) + " continient bonuses";
         troopsLeftText.gameObject.SetActive(true);
         troopsLeftText.text = TroopsAwarded.ToString();
         nextPhaseButton.transform.GetChild(0).gameObject.SetActive(false);
@@ -63,6 +69,7 @@ public class DraftHandlerScript : MonoBehaviour
         GameMasterScript.Instance.SelectionHandler.ActionAfterCountrySelect1 += SelectCountry;
     }
 
+    // Closes the popup --- couldve been invoke method but idk enumerators are cool too
     IEnumerator popupClose()
     {
         yield return new WaitForSeconds(3f);
@@ -77,6 +84,7 @@ public class DraftHandlerScript : MonoBehaviour
         nextPhaseButton.transform.GetChild(0).gameObject.SetActive(true);
     }
 
+    // When a country is selected show the troop select
     public void SelectCountry(GameObject country)
     {
         if (selectedCountry != null) return;

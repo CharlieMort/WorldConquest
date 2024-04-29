@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028381, g: 0.22571406, b: 0.30692294, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028353, g: 0.2257137, b: 0.30692255, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2322,7 +2322,7 @@ MonoBehaviour:
   continentName: Australia
   countryArr: []
   ownerID: -1
-  troopBonus: 0
+  troopBonus: 2
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5939,7 +5939,7 @@ MonoBehaviour:
   continentName: North America
   countryArr: []
   ownerID: -1
-  troopBonus: 0
+  troopBonus: 5
 --- !u!4 &894750574 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4672445824276298748, guid: 47a7ffd328f31a445aebef977a482f25,
@@ -7702,7 +7702,7 @@ MonoBehaviour:
   continentName: Asia
   countryArr: []
   ownerID: -1
-  troopBonus: 0
+  troopBonus: 7
 --- !u!4 &1318393459 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4672445824276298748, guid: 47a7ffd328f31a445aebef977a482f25,
@@ -7929,7 +7929,7 @@ MonoBehaviour:
   continentName: Europe
   countryArr: []
   ownerID: -1
-  troopBonus: 0
+  troopBonus: 5
 --- !u!1001 &1382875288
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8567,7 +8567,7 @@ MonoBehaviour:
   continentName: Africa
   countryArr: []
   ownerID: -1
-  troopBonus: 0
+  troopBonus: 3
 --- !u!1 &1566168113
 GameObject:
   m_ObjectHideFlags: 0
@@ -10897,7 +10897,7 @@ MonoBehaviour:
   continentName: South America
   countryArr: []
   ownerID: -1
-  troopBonus: 0
+  troopBonus: 2
 --- !u!1 &1909121068
 GameObject:
   m_ObjectHideFlags: 0
@@ -11894,6 +11894,9 @@ MonoBehaviour:
     type: 3}
   defenderDie: {fileID: 181028574747329558, guid: a0aca6bdce41b804d898f7d1633f5fbc,
     type: 3}
+  preSmashDelay: 0.5
+  postSmashDelay: 2
+  smashSpeed: 50
 --- !u!4 &2081840761
 Transform:
   m_ObjectHideFlags: 0

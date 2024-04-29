@@ -7,6 +7,7 @@ public class GameSetupScript : MonoBehaviour
 {
     public string allocationType = "random"; // or manual
 
+    // Does a random setup
     public void AutoSetup(CountryScript[] countries, int playerCount)
     {
         int turn = 0;

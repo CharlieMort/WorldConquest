@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+// BASE SCRIPT FOR ALL COUNTRIES
 public class CountryScript : MonoBehaviour
 {
     public string countryName; // place name
@@ -25,6 +26,7 @@ public class CountryScript : MonoBehaviour
         countryMat = transform.Find("CountryModel").GetComponent<MeshRenderer>().material;
     }
 
+    // When owner changes we need to change the color as well
     public void ChangeOwner(int playerID)
     {
         ownerID = playerID;

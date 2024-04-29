@@ -24,7 +24,7 @@ public class ContinentScript : MonoBehaviour
         for (int i = 1; i < countryArr.Length; i++)
         {
             // if someone else owns a country then whole continent hasn't been captured
-            if (countryArr[i].ownerID != currentOwner) return;
+            if (countryArr[i].ownerID != currentOwner) ownerID = -1;
         }
         ownerID = currentOwner;
     }

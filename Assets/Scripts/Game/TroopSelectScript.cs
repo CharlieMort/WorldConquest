@@ -15,7 +15,6 @@ public class TroopSelectScript : MonoBehaviour
     private int troopMin = 1;
     private int troopMax = 10;
     private int troopCount = 0;
-    bool finisedRolling;
 
     private void Start()
     {
@@ -23,23 +22,27 @@ public class TroopSelectScript : MonoBehaviour
         troopNum = troopSelect.Find("TroopCount").GetComponent<TextMeshProUGUI>();
     }
 
+    // Shows the slider
     public void Show()
     {
         troopSelect.gameObject.SetActive(true);
         OnValueChange();
     }
 
+    // Hides the slider
     public void Hide()
     {
         troopSelect.gameObject.SetActive(false);
     }
 
+    // Sets the max and min amt of troops that the slider can slide between ??? if that makes sense
     public void SetTroopMinMax(int min, int max)
     {
         troopMin = min;
         troopMax = max;
     }
 
+    // Triggered by unity slider when..... the value changes
     public void OnValueChange()
     {
         int num = Mathf.RoundToInt(troopMin + (slider.value - 0) * (troopMax - troopMin));
@@ -47,6 +50,7 @@ public class TroopSelectScript : MonoBehaviour
         troopCount = num;
     }
 
+    // Scripts subscribe to the confirm event so when the player confirms their selection the subscribers get notified with the amt of troops selected
     public Action<int> ActionAfterTroopSelectConfirm;
     public void Confirm()
     {
@@ -54,6 +58,7 @@ public class TroopSelectScript : MonoBehaviour
         if (ActionAfterTroopSelectConfirm != null) ActionAfterTroopSelectConfirm(troopCount);
     }
 
+    // Haha sike i dont wanna select any troops loser
     public Action ActionAfterTroopSelectCancel;
     public void Cancel()
     {

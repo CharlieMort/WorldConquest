@@ -5,24 +5,26 @@ using UnityEngine;
 
 public class AttackHandlerScript : MonoBehaviour
 {
-    private int playersTurn;
+    private int playersTurn; // Current players turn IDX
     private CountryScript attackingCountry = null;
     private CountryScript defendingCountry = null;
-    private CountryScript[] attackableCountrys;
+    private CountryScript[] attackableCountrys; // Used to store countries that can be attacked
 
-    private bool playerGetsCard = false;
+    private bool playerGetsCard = false; // TODO
 
     public GameObject attackUI;
 
+    int aDiceNum = 0; // Amount of attacker dice chosen
+
     private void Start()
     {
+        // Subscribe to events (makes sure to like and hit that notification bell)
         GameMasterScript.Instance.ActionAfterPhaseChange += BeginAttack;
         GameMasterScript.Instance.ActionBeforePhaseChange += EndAttack;
     }
 
-    bool finishedRolling = false;
-    int aDiceNum = 0;
-
+    // Called everytime the phase changes
+    // Checks if the phase is the attack phase and if so sets up everything including whos attack phase it is and highlighting their countries
     private void BeginAttack()
     {
         if (GameMasterScript.Instance.getGameState() == GAME_STATE.ATTACK)
@@ -34,6 +36,9 @@ public class AttackHandlerScript : MonoBehaviour
         }
     }
 
+    // Called at the end of the whole attack phase
+    // Triggers the next phase event and resets all the variables ready for the next time it comes around
+    // Also un-subscribes from the troop selector because fortify will use it next
     private void EndAttack()
     {
         if (GameMasterScript.Instance.getGameState() == GAME_STATE.ATTACK)
@@ -43,6 +48,7 @@ public class AttackHandlerScript : MonoBehaviour
         }
     }
 
+    // Highlights all countries are both the attackers countries and have more than 1 troop
     public void UpdateCountries()
     {
         foreach (CountryScript cs in GameMasterScript.Instance.getAllCountries())
@@ -55,6 +61,11 @@ public class AttackHandlerScript : MonoBehaviour
         }
     }
 
+    // Called by the event click (everytime a country is clicked)
+    // If allowed to be clicked then if its the first to be selected this means its the attacking country
+    // - highlight its enemy neighbours
+    // If attacking country already selected it must be a defending country
+    // - show the dice depending on how many troops are in both attacking and defending coutnries
     private void SelectCountry(GameObject country)
     {
         CountryScript cs = country.GetComponent<CountryScript>();
@@ -76,7 +87,7 @@ public class AttackHandlerScript : MonoBehaviour
                     }
                 }
 
-                // DO THE ARROWS THAT SHOW WHICH COUNTRIES IT CAN ATTACK
+                // TODO: THE ARROWS THAT SHOW WHICH COUNTRIES IT CAN ATTACK
             }
         }
         else
@@ -89,13 +100,14 @@ public class AttackHandlerScript : MonoBehaviour
                 attackUI.transform.GetChild(1).gameObject.SetActive(true);
                 attackUI.transform.GetChild(2).gameObject.SetActive(true);
 
-                // DO THE BIG ARROW THAT SIGNIFIES ITS ATTACKING ONE COUNTRY FROM ANOTHER
+                // TODO: THE BIG ARROW THAT SIGNIFIES ITS ATTACKING ONE COUNTRY FROM ANOTHER
 
                 ShowUI();
             }
         }
     }
 
+    // Toggles the UI elements depedning on how many troops are in the attacking country
     void ShowUI()
     {
         switch (attackingCountry.troopCount)
@@ -116,6 +128,10 @@ public class AttackHandlerScript : MonoBehaviour
         }
     }
 
+    // Starts the attack
+    // Can be used by AI who dont click as they dont have hands... yet
+    // Sets the number of dice - triggers them to be rolled - then waits for outcome
+    // Improvements can be made to skip animation in need of time or performance
     public void Attack(int numOfDice)
     {
         aDiceNum = numOfDice;
@@ -124,7 +140,7 @@ public class AttackHandlerScript : MonoBehaviour
         else dDiceNum = 1;
         GameMasterScript.Instance.DiceHandlerScript.ThrowDice(numOfDice, dDiceNum);
         GameMasterScript.Instance.DiceHandlerScript.ActionAfterDiceRoll += HandleAttack;
-        foreach(CountryScript cunt in attackableCountrys)
+        foreach(CountryScript cunt in attackableCountrys) // CoUNTry
         {
             if (cunt != defendingCountry)
             {
@@ -134,6 +150,8 @@ public class AttackHandlerScript : MonoBehaviour
         attackUI.SetActive(false);
     }
 
+    // Triggers after the dice roll animation has concluded
+    // Parses the outcomes array into acutal effects eg removes troops from countries that won/lost and updates the map
     public void HandleAttack(int[] outcomes)
     {
         attackUI.SetActive(true);
@@ -160,10 +178,13 @@ public class AttackHandlerScript : MonoBehaviour
         }
     }
 
+    // Easy method to move x amount of troops that has been recently conquered
     public void MoveTroopsToInvaded(int num)
     {
         attackingCountry.AddTroops(-num);
         defendingCountry.AddTroops(num);
+
+        defendingCountry.transform.parent.GetComponent<ContinentScript>().CheckForOwner();
         GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm -= MoveTroopsToInvaded;
         GameMasterScript.Instance.TroopSelectScript.Hide();
         playerGetsCard = true;
@@ -171,6 +192,7 @@ public class AttackHandlerScript : MonoBehaviour
         UpdateCountries();
     }
 
+    // Cancels the attack and resets the variables
     public void CancelAttack()
     {
         attackingCountry = null;

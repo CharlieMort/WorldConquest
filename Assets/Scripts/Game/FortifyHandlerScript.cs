@@ -114,6 +114,7 @@ public class FortifyHandlerScript : MonoBehaviour
         }
     }
 
+    // When a country is selected it finds the path created by the above method and only highlights that path
     private List<CountryScript> path;
     public void OnCountrySelect(GameObject c)
     {
@@ -158,6 +159,7 @@ public class FortifyHandlerScript : MonoBehaviour
         }
     }
 
+    // Moves..... the troops
     public void MoveTroops(int num)
     {
         fromCountry.AddTroops(-num);

@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Explode : MonoBehaviour
 {
-    public int cubesPerAxis = 10;
-    public Color cubeColor;
+    public int cubesPerAxis = 10; // How many cubes are spawnded cubed. Very expensive so keep number low enough
+    public Color cubeColor; // Red for attacker blue for defender
     public bool isExploding = false;
 
-    List<GameObject> cubes;
+    List<GameObject> cubes = new List<GameObject>();
 
+    // Instanstiates all the dummy cubes to explode. Is very expensive to typically run a little before physics is added
     public void SpawnCubes()
     {
         cubes = new List<GameObject>();
@@ -35,6 +36,7 @@ public class Explode : MonoBehaviour
         }
     }
 
+    // Enables the cubes to recieve physics as well as giving them an explosion force so they shoot out
     public void ExplodeCube()
     {
         isExploding = true;
@@ -44,9 +46,9 @@ public class Explode : MonoBehaviour
             cube.SetActive(true);
             cube.GetComponent<Rigidbody>().AddExplosionForce(1000f, transform.position, 4f);
         }
-        Invoke("DespawnCubes", 2f);
     }
 
+    // Despawns all the cubes otherwise framerate takes a big hit
     public void DespawnCubes()
     {
         foreach(GameObject c in cubes)
