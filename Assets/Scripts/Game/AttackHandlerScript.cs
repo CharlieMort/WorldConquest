@@ -77,7 +77,7 @@ public class AttackHandlerScript : MonoBehaviour
                 attackableCountrys = cs.neighbourArr;
                 foreach (CountryScript c in GameMasterScript.Instance.getAllCountries())
                 {
-                    if (c == cs || attackableCountrys.Contains(c))
+                    if (c == cs || attackableCountrys.Contains(c) && c.ownerID != playersTurn)
                     {
                         c.Highlight();
                     }
@@ -92,7 +92,7 @@ public class AttackHandlerScript : MonoBehaviour
         }
         else
         {
-            if (attackableCountrys.Contains(cs))
+            if (attackableCountrys.Contains(cs) && cs.ownerID != playersTurn)
             {
                 defendingCountry = cs;
                 attackUI.SetActive(true);
@@ -175,6 +175,13 @@ public class AttackHandlerScript : MonoBehaviour
             GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount - 1);
             GameMasterScript.Instance.TroopSelectScript.Show();
             GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm += MoveTroopsToInvaded;
+        }
+
+        if (attackingCountry.troopCount <= 0) // Defender won the battle
+        {
+            attackUI.SetActive(false);
+            attackingCountry.ChangeOwner(defendingCountry.ownerID);
+            GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount + 1);
         }
     }
 

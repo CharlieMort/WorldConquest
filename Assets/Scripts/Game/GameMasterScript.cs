@@ -45,6 +45,7 @@ public class GameMasterScript : MonoBehaviour
         SelectionHandler = GetComponent<SelectionHandler>();
         TroopSelectScript = GetComponent<TroopSelectScript>();
         gameSetupScript = GetComponent<GameSetupScript>();
+
     }
 
     public void GameStart()
@@ -91,9 +92,24 @@ public class GameMasterScript : MonoBehaviour
     public Action ActionAfterTurnChange;
     public void NextTurn()
     {
+        UpdateCountriesOwned();
+        
         playersTurn++;
         if (playersTurn == playerArr.Length) playersTurn = 0;
 
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
+    }
+
+    public void UpdateCountriesOwned()
+    {
+        int owned = 0;
+        foreach (CountryScript co in getAllCountries())
+        {
+            if (co.ownerID == 1)
+            {
+                owned++;
+            }
+        }
+        print(owned);
     }
 }

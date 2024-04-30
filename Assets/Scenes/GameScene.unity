@@ -1673,6 +1673,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 0, b: 0, a: 1}
   playerUI: {fileID: 673368490}
   playerSprite: {fileID: 21300000, guid: e2e64094569e38040a242152f9bea505, type: 3}
+  countriesOwned: 1
 --- !u!1 &257820948
 GameObject:
   m_ObjectHideFlags: 0
@@ -2330,6 +2331,7 @@ MonoBehaviour:
   playerColor: {r: 0, g: 0.87080336, b: 1, a: 1}
   playerUI: {fileID: 1583894677}
   playerSprite: {fileID: 21300000, guid: 6c8e0e9e35a5e6544aac84b58ca75af4, type: 3}
+  countriesOwned: 1
 --- !u!1 &402282937
 GameObject:
   m_ObjectHideFlags: 0
@@ -4618,6 +4620,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 0, b: 1, a: 1}
   playerUI: {fileID: 696516144}
   playerSprite: {fileID: 21300000, guid: 1fea5c2c2434fcc40ae2342e4e4cc8b9, type: 3}
+  countriesOwned: 1
 --- !u!1001 &768210745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9326,6 +9329,7 @@ MonoBehaviour:
   playerColor: {r: 1, g: 1, b: 0, a: 1}
   playerUI: {fileID: 1909121068}
   playerSprite: {fileID: 21300000, guid: fd500a26290197943a8ed33e1a2885ca, type: 3}
+  countriesOwned: 1
 --- !u!1 &1583894677
 GameObject:
   m_ObjectHideFlags: 0
