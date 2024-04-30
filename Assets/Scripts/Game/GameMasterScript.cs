@@ -100,16 +100,37 @@ public class GameMasterScript : MonoBehaviour
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
 
-    public void UpdateCountriesOwned()
+    public void UpdateCountriesOwned() // this is for player death
     {
-        int owned = 0;
+        int owned0 = 0;
+        int owned1 = 0;
+        int owned2 = 0;
+        int owned3 = 0;
         foreach (CountryScript co in getAllCountries())
         {
+            if (co.ownerID == 0)
+            {
+                owned0++;
+            }
+            
             if (co.ownerID == 1)
             {
-                owned++;
+                owned1++;
+            }
+
+            if (co.ownerID == 2)
+            {
+                owned2++;
+            }
+
+            if (co.ownerID == 3)
+            {
+                owned3++;
             }
         }
-        print(owned);
+        print(owned0);
+        print(owned1);
+        print(owned2);
+        print(owned3);
     }
 }

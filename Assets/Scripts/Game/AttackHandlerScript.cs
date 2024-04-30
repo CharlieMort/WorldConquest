@@ -177,11 +177,12 @@ public class AttackHandlerScript : MonoBehaviour
             GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm += MoveTroopsToInvaded;
         }
 
-        if (attackingCountry.troopCount <= 0) // Defender won the battle
+        if (attackingCountry.troopCount <= 1) // Attacker cant continue the battle
         {
             attackUI.SetActive(false);
-            attackingCountry.ChangeOwner(defendingCountry.ownerID);
-            GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount + 1);
+            //attackingCountry.ChangeOwner(defendingCountry.ownerID);
+            //GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount + 1);
+            CancelAttack();
         }
     }
 
