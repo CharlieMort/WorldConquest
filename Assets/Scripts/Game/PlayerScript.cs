@@ -9,7 +9,6 @@ public class PlayerScript : MonoBehaviour
     public Color playerColor;
     public GameObject playerUI;
     public Sprite playerSprite;
-    public string countriesOwned;
 
 
     private void Start()

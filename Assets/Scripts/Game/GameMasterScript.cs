@@ -25,6 +25,8 @@ public class GameMasterScript : MonoBehaviour
     public DiceHandlerScript DiceHandlerScript;
     private GameSetupScript gameSetupScript;
 
+    private int[] Owned = {0, 0, 0, 0};
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -40,7 +42,7 @@ public class GameMasterScript : MonoBehaviour
         List<CountryScript> temp = new List<CountryScript>();
         temp.AddRange(transform.Find("Continents").GetComponentsInChildren<CountryScript>());
         countryArr = temp.ToArray();
-        print(countryArr.Length);
+        //print(countryArr.Length);
 
         SelectionHandler = GetComponent<SelectionHandler>();
         TroopSelectScript = GetComponent<TroopSelectScript>();
@@ -97,40 +99,29 @@ public class GameMasterScript : MonoBehaviour
         playersTurn++;
         if (playersTurn == playerArr.Length) playersTurn = 0;
 
+        while (Owned[playersTurn] == 0)
+        {
+            playersTurn++;
+            if (playersTurn == playerArr.Length) playersTurn = 0;
+        }
+
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
 
     public void UpdateCountriesOwned() // this is for player death
     {
-        int owned0 = 0;
-        int owned1 = 0;
-        int owned2 = 0;
-        int owned3 = 0;
+        Owned[0] = 0;
+        Owned[1] = 0;
+        Owned[2] = 0;
+        Owned[3] = 0;
         foreach (CountryScript co in getAllCountries())
         {
-            if (co.ownerID == 0)
-            {
-                owned0++;
-            }
-            
-            if (co.ownerID == 1)
-            {
-                owned1++;
-            }
-
-            if (co.ownerID == 2)
-            {
-                owned2++;
-            }
-
-            if (co.ownerID == 3)
-            {
-                owned3++;
-            }
+            Owned[co.ownerID]++;
         }
-        print(owned0);
-        print(owned1);
-        print(owned2);
-        print(owned3);
+        //print(Owned[0]);
+        //print(Owned[1]);
+        //print(Owned[2]);
+        //print(Owned[3]);
+
     }
 }
