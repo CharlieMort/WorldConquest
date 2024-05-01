@@ -20,6 +20,7 @@ public class GameMasterScript : MonoBehaviour
     private PlayerScript[] playerArr;
     private CountryScript[] countryArr;
 
+    public CardHandlerScript CardHandlerScript;
     public SelectionHandler SelectionHandler;
     public TroopSelectScript TroopSelectScript;
     public DiceHandlerScript DiceHandlerScript;

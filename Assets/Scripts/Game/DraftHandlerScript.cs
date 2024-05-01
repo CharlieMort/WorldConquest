@@ -33,8 +33,7 @@ public class DraftHandlerScript : MonoBehaviour
     public void BeginDraft() 
     {
         playerNum = GameMasterScript.Instance.getPlayersTurn();
-
-        // TODO: if player dead lol
+        GameMasterScript.Instance.CardHandlerScript.UpdateUI();
 
         int cAmt = 0;
         foreach (CountryScript country in GameMasterScript.Instance.getAllCountries()) 
@@ -119,5 +118,11 @@ public class DraftHandlerScript : MonoBehaviour
             EndDraft();
         }
         GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm -= AddTroops;
+    }
+
+    public void AddTroopsToDraft(int num)
+    {
+        remainingTroops += num;
+        troopsLeftText.text = remainingTroops.ToString();
     }
 }

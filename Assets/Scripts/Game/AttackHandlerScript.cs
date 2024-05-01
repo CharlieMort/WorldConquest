@@ -43,6 +43,10 @@ public class AttackHandlerScript : MonoBehaviour
     {
         if (GameMasterScript.Instance.getGameState() == GAME_STATE.ATTACK)
         {
+            if (playerGetsCard)
+            {
+                GameMasterScript.Instance.GetCurrentPlayer().AddRandomCard();
+            }
             CancelAttack();
             GameMasterScript.Instance.SelectionHandler.ActionAfterCountrySelect1 -= SelectCountry;
         }
