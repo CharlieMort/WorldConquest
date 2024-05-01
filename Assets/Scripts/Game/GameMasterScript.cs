@@ -30,6 +30,7 @@ public class GameMasterScript : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 2.0f;
         if (Instance != null && Instance != this)
         {
             Destroy(this);

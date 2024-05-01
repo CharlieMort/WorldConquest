@@ -20,13 +20,16 @@ public class ContinentScript : MonoBehaviour
     // - TODO: make it highlight the continent in the owners color to signal what color player owns it
     public void CheckForOwner()
     {
-        int currentOwner = countryArr[1].ownerID;
         for (int i = 1; i < countryArr.Length; i++)
         {
             // if someone else owns a country then whole continent hasn't been captured
-            if (countryArr[i].ownerID != currentOwner) ownerID = -1;
+            if (countryArr[i].ownerID != countryArr[0].ownerID)
+            {
+                ownerID = -1;
+                return;
+            }
         }
-        ownerID = currentOwner;
+        ownerID = countryArr[0].ownerID;
     }
 
     // Give Troop Bonus Method

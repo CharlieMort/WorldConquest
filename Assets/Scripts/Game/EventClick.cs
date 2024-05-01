@@ -13,7 +13,7 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        //print("Click");
+        print("Click");
         GameMasterScript.Instance.SelectionHandler.SelectCountry(transform.parent.gameObject); // will error if not a country
     }
 

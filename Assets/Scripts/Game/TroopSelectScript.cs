@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
+using Unity.VisualScripting;
 
 public class TroopSelectScript : MonoBehaviour
 {
@@ -55,7 +56,10 @@ public class TroopSelectScript : MonoBehaviour
     public void Confirm()
     {
         Hide();
-        if (ActionAfterTroopSelectConfirm != null) ActionAfterTroopSelectConfirm(troopCount);
+        if (ActionAfterTroopSelectConfirm != null)
+        {
+            ActionAfterTroopSelectConfirm(troopCount);
+        }
     }
 
     // Haha sike i dont wanna select any troops loser
