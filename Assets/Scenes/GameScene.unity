@@ -13720,7 +13720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useAllAI: 1
-  delay: 0.5
+  delay: 0.1
 --- !u!1001 &1936184906
 PrefabInstance:
   m_ObjectHideFlags: 0
