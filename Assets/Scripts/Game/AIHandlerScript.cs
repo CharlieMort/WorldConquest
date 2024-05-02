@@ -6,7 +6,7 @@ using UnityEngine;
 public class AIHandlerScript : MonoBehaviour
 {
     public bool useAllAI = false;
-    public bool useAI = true;
+    public bool useAI = false;
     private DraftHandlerScript dhs;
     private AttackHandlerScript ahs;
     private FortifyHandlerScript fhs;
@@ -51,7 +51,10 @@ public class AIHandlerScript : MonoBehaviour
         ahs = GameMasterScript.Instance.GetComponent<AttackHandlerScript>();
         fhs = GameMasterScript.Instance.GetComponent<FortifyHandlerScript>();
         tss = GameMasterScript.Instance.TroopSelectScript;
-        
+
+        if (PlayerInfoStaticScript.gameType == "eve") useAllAI = true;
+        else if (PlayerInfoStaticScript.gameType == "pve") useAI = true;
+
         if (useAllAI)
         {
             GameMasterScript.Instance.DiceHandlerScript.skipAnim = true;
