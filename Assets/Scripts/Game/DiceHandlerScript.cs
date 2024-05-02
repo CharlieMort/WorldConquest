@@ -298,13 +298,26 @@ public class DiceHandlerScript : MonoBehaviour
         if (ActionAfterDiceRoll != null) ActionAfterDiceRoll(winners.ToArray());
     }
 
-
+    public bool skipAnim = false;
     // The inital method to this madness
     // Dice numbers arent handled here as in the rules you cant have more defender dice than attacker dice (room for error)
     // Dice numbers are handled in the attack handler
     // The method creates all the dice gameobjects and sets the up and then finally gives a "push" (force) to roll them
     public void ThrowDice(int attackDie, int defendDie)
     {
+        if (skipAnim)
+        {
+            List<int> x = new List<int>();
+            for (int i = 0; i<defendDie; i++)
+            {
+                int a = UnityEngine.Random.Range(1, 7);
+                int d = UnityEngine.Random.Range(1, 7);
+                if (a > d) x.Add(0);
+                else x.Add(1);
+            }
+            if (ActionAfterDiceRoll != null) ActionAfterDiceRoll(x.ToArray());
+            return;
+        }
         dice = new List<GameObject>();
         aDiceNum = attackDie;
         for (int i = 0; i < attackDie; i++)

@@ -87,6 +87,7 @@ public class GameMasterScript : MonoBehaviour
                 break;
             case GAME_STATE.FORTIFY:
                 gameState = GAME_STATE.DRAFT;
+                print("Next turn");
                 NextTurn();
                 break;
         }
@@ -101,12 +102,12 @@ public class GameMasterScript : MonoBehaviour
         playersTurn++;
         if (playersTurn == playerArr.Length) playersTurn = 0;
 
-        while (Owned[playersTurn] == 0)
-        {
-            playersTurn++;
-            if (playersTurn == playerArr.Length) playersTurn = 0;
-        }
-
+        //while (Owned[playersTurn] == 0)
+        //{
+        //    playersTurn++;
+        //    if (playersTurn == playerArr.Length) playersTurn = 0;
+        //}
+        print("PLAYER TURN == " + playersTurn);
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
 

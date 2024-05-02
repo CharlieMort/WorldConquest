@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DraftHandlerScript : MonoBehaviour
 {
     private int TroopsAwarded = 5;
-    private int remainingTroops;
+    public int remainingTroops;
 
     private int playerNum;
 
@@ -15,6 +15,7 @@ public class DraftHandlerScript : MonoBehaviour
     public Button nextPhaseButton;
 
     public Transform popup;
+    public float popupDelay = 2.5f;
     private TextMeshProUGUI popupName;
     private TextMeshProUGUI popupDesc;
     private TextMeshProUGUI troopsLeftText;
@@ -71,7 +72,7 @@ public class DraftHandlerScript : MonoBehaviour
     // Closes the popup --- couldve been invoke method but idk enumerators are cool too
     IEnumerator popupClose()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(popupDelay);
         popup.gameObject.SetActive(false);
     }
 

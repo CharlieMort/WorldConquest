@@ -12,6 +12,7 @@ public class FortifyHandlerScript : MonoBehaviour
     private void Start()
     {
         GameMasterScript.Instance.ActionAfterPhaseChange += BeginFortify;
+        GameMasterScript.Instance.ActionBeforePhaseChange += EndFortify;
     }
 
     public void BeginFortify()
@@ -165,8 +166,7 @@ public class FortifyHandlerScript : MonoBehaviour
     {
         fromCountry.AddTroops(-num);
         toCountry.AddTroops(num);
-
-        EndFortify();
+        GameMasterScript.Instance.NextPhaseMethod();
     }
 
     public void CancelFortify()
@@ -179,8 +179,11 @@ public class FortifyHandlerScript : MonoBehaviour
 
     public void EndFortify()
     {
-        CancelFortify();
-        GameMasterScript.Instance.SelectionHandler.ActionAfterCountrySelect1 -= OnCountrySelect;
-        GameMasterScript.Instance.NextPhaseMethod();
+        if (GameMasterScript.Instance.getGameState() == GAME_STATE.FORTIFY)
+        {
+            CancelFortify();
+            GameMasterScript.Instance.SelectionHandler.ActionAfterCountrySelect1 -= OnCountrySelect;
+            GameMasterScript.Instance.TroopSelectScript.ActionAfterTroopSelectConfirm -= MoveTroops;
+        }
     }
 }

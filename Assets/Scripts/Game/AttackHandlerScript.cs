@@ -13,6 +13,8 @@ public class AttackHandlerScript : MonoBehaviour
     private bool playerGetsCard = false; // TODO
 
     public GameObject attackUI;
+    public bool attacking = false;
+    public bool movingTroops = false;
 
     int aDiceNum = 0; // Amount of attacker dice chosen
 
@@ -70,18 +72,20 @@ public class AttackHandlerScript : MonoBehaviour
     // - highlight its enemy neighbours
     // If attacking country already selected it must be a defending country
     // - show the dice depending on how many troops are in both attacking and defending coutnries
-    private void SelectCountry(GameObject country)
+    public void SelectCountry(GameObject country)
     {
         CountryScript cs = country.GetComponent<CountryScript>();
+        print(cs.name);
         if (attackingCountry == null)
         {
-            if (cs.ownerID == playersTurn && cs.troopCount > 1)
+            if (cs.ownerID == GameMasterScript.Instance.getPlayersTurn() && cs.troopCount > 1)
             {
                 attackingCountry = cs;
+                print("ATTACKER");
                 attackableCountrys = cs.neighbourArr;
                 foreach (CountryScript c in GameMasterScript.Instance.getAllCountries())
                 {
-                    if (c == cs || attackableCountrys.Contains(c) && c.ownerID != playersTurn)
+                    if (c == cs || attackableCountrys.Contains(c) && c.ownerID != GameMasterScript.Instance.getPlayersTurn())
                     {
                         c.Highlight();
                     }
@@ -93,12 +97,17 @@ public class AttackHandlerScript : MonoBehaviour
 
                 // TODO: THE ARROWS THAT SHOW WHICH COUNTRIES IT CAN ATTACK
             }
+            else
+            {
+                print("REJECTED OWNER ID: " + cs.ownerID + " != " + GameMasterScript.Instance.getPlayersTurn());
+            }
         }
         else
         {
-            if (attackableCountrys.Contains(cs) && cs.ownerID != playersTurn)
+            if (attackableCountrys.Contains(cs) && cs.ownerID != GameMasterScript.Instance.getPlayersTurn())
             {
                 defendingCountry = cs;
+                print("DEFENDER");
                 attackUI.SetActive(true);
                 attackUI.transform.GetChild(0).gameObject.SetActive(true);
                 attackUI.transform.GetChild(1).gameObject.SetActive(true);
@@ -118,9 +127,11 @@ public class AttackHandlerScript : MonoBehaviour
         {
             case 0:
                 Debug.LogError("COUNTRY SELECTED HAS ZERO TROOPS.... this shouldnt happen");
+                CancelAttack();
                 break;
             case 1:
                 Debug.LogError("COUNTRY SELECTED HAS ONE TROOP.... this shouldnt happen");
+                CancelAttack();
                 break;
             case 2:
                 attackUI.transform.GetChild(1).gameObject.SetActive(false);
@@ -138,6 +149,7 @@ public class AttackHandlerScript : MonoBehaviour
     // Improvements can be made to skip animation in need of time or performance
     public void Attack(int numOfDice)
     {
+        attacking = true;
         aDiceNum = numOfDice;
         int dDiceNum = defendingCountry.troopCount;
         if (dDiceNum > 1) dDiceNum = 2;
@@ -158,6 +170,7 @@ public class AttackHandlerScript : MonoBehaviour
     // Parses the outcomes array into acutal effects eg removes troops from countries that won/lost and updates the map
     public void HandleAttack(int[] outcomes)
     {
+        attacking = false;
         attackUI.SetActive(true);
         GameMasterScript.Instance.DiceHandlerScript.ActionAfterDiceRoll -= HandleAttack;
         foreach(int outcome in outcomes)
@@ -169,12 +182,12 @@ public class AttackHandlerScript : MonoBehaviour
             else if (outcome == 1) // Defender wins
             {
                 attackingCountry.AddTroops(-1);
-                ShowUI();
             }
         }
         if (defendingCountry.troopCount <= 0) // Attacker won the battle
         {
             attackUI.SetActive(false);
+            movingTroops = true;
             defendingCountry.ChangeOwner(attackingCountry.ownerID);
             GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount - 1);
             GameMasterScript.Instance.TroopSelectScript.Show();
@@ -188,11 +201,16 @@ public class AttackHandlerScript : MonoBehaviour
             //GameMasterScript.Instance.TroopSelectScript.SetTroopMinMax(aDiceNum, attackingCountry.troopCount + 1);
             CancelAttack();
         }
+        else
+        {
+            ShowUI();
+        }
     }
 
     // Easy method to move x amount of troops that has been recently conquered
     public void MoveTroopsToInvaded(int num)
     {
+        movingTroops = false;
         attackingCountry.AddTroops(-num);
         defendingCountry.AddTroops(num);
 
