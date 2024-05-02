@@ -6,11 +6,14 @@ using UnityEngine;
 public class AIHandlerScript : MonoBehaviour
 {
     public bool useAllAI = false;
+    public bool useAI = true;
     private DraftHandlerScript dhs;
     private AttackHandlerScript ahs;
     private FortifyHandlerScript fhs;
     private TroopSelectScript tss;
     public float delay = 0.5f;
+
+    public int playerIdx = 0;
 
     private CountryScript GetRandomOwnedCountry()
     {
@@ -56,6 +59,11 @@ public class AIHandlerScript : MonoBehaviour
             Invoke("Draft", 2.5f);
             GameMasterScript.Instance.ActionAfterPhaseChange += NextPhase;
         }
+        else if (useAI)
+        {
+            ahs.ActionAfterAttackFinish += FinishAttack;
+            GameMasterScript.Instance.ActionAfterPhaseChange += NextPhase;
+        }
     }
 
     void GameStart()
@@ -66,17 +74,26 @@ public class AIHandlerScript : MonoBehaviour
 
     void NextPhase()
     {
-        switch(GameMasterScript.Instance.getGameState())
+        if (GameMasterScript.Instance.getPlayersTurn() != playerIdx || useAllAI)
         {
-            case GAME_STATE.DRAFT:
-                Invoke("Draft", delay);
-                break;
-            case GAME_STATE.ATTACK:
-                Invoke("Attack", delay);
-                break;
-            case GAME_STATE.FORTIFY:
-                Invoke("Fortify", delay);
-                break;
+            switch (GameMasterScript.Instance.getGameState())
+            {
+                case GAME_STATE.DRAFT:
+                    Invoke("Draft", delay);
+                    break;
+                case GAME_STATE.ATTACK:
+                    if (useAI)
+                    {
+                        maxAttacks = Random.Range(1, 3);
+                        attackCounter = 0;
+                        Invoke("AttackWithDice", delay);
+                    }
+                    else Invoke("Attack", delay);
+                    break;
+                case GAME_STATE.FORTIFY:
+                    Invoke("Fortify", delay);
+                    break;
+            }
         }
     }
 
@@ -130,6 +147,65 @@ public class AIHandlerScript : MonoBehaviour
         }
 
         GameMasterScript.Instance.NextPhaseMethod();
+    }
+
+    int maxAttacks = 0;
+    int attackCounter = 0;
+    void AttackWithDice()
+    {
+        print("ATTACK PHASE");
+
+        if (attackCounter < maxAttacks)
+        {
+            CountryScript attackingCountry = null;
+            CountryScript defendingCountry = null;
+            int iCounter = 0;
+            while (defendingCountry == null)
+            {
+                attackingCountry = GetRandomAttackableOwnedCountry();
+                if (attackingCountry == null) break;
+                for (int i = 0; i < attackingCountry.neighbourArr.Length; i++)
+                {
+                    if (attackingCountry.neighbourArr[i].ownerID != attackingCountry.ownerID)
+                    {
+                        defendingCountry = attackingCountry.neighbourArr[i];
+                        break;
+                    }
+                }
+                iCounter++;
+                if (iCounter > 100)
+                {
+                    attackingCountry = null;
+                    break;
+                }
+            }
+            if (attackingCountry == null)
+            {
+                GameMasterScript.Instance.NextPhaseMethod();
+                return;
+            }
+            ahs.SelectCountry(attackingCountry.gameObject);
+            ahs.SelectCountry(defendingCountry.gameObject);
+            ahs.Attack(2);
+        }
+        else
+        {
+            GameMasterScript.Instance.NextPhaseMethod();
+        }
+    }
+
+    void FinishAttack()
+    {
+        if (useAI && playerIdx != GameMasterScript.Instance.getPlayersTurn())
+        {
+            attackCounter++;
+            if (ahs.movingTroops)
+            {
+                ahs.MoveTroopsToInvaded(ahs.attackingCountry.troopCount - 1);
+            }
+            ahs.CancelAttack();
+            AttackWithDice();
+        }
     }
 
     void Fortify()

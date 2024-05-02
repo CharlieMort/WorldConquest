@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using UnityEngine;
 public class AttackHandlerScript : MonoBehaviour
 {
     private int playersTurn; // Current players turn IDX
-    private CountryScript attackingCountry = null;
+    public CountryScript attackingCountry = null;
     private CountryScript defendingCountry = null;
     private CountryScript[] attackableCountrys; // Used to store countries that can be attacked
 
@@ -168,6 +169,7 @@ public class AttackHandlerScript : MonoBehaviour
 
     // Triggers after the dice roll animation has concluded
     // Parses the outcomes array into acutal effects eg removes troops from countries that won/lost and updates the map
+    public Action ActionAfterAttackFinish;
     public void HandleAttack(int[] outcomes)
     {
         attacking = false;
@@ -205,6 +207,7 @@ public class AttackHandlerScript : MonoBehaviour
         {
             ShowUI();
         }
+        if (ActionAfterAttackFinish != null) ActionAfterAttackFinish();
     }
 
     // Easy method to move x amount of troops that has been recently conquered

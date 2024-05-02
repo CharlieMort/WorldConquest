@@ -14541,6 +14541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe488fcc4831d842b77f6c100e13f9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingCountry: {fileID: 0}
   attackUI: {fileID: 746135920}
   attacking: 0
   movingTroops: 0
@@ -14581,8 +14582,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e871f0d557ad32c4d95334d067f98d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useAllAI: 1
-  delay: 0.1
+  useAllAI: 0
+  useAI: 1
+  delay: 1
+  playerIdx: 0
 --- !u!1001 &1936184906
 PrefabInstance:
   m_ObjectHideFlags: 0
