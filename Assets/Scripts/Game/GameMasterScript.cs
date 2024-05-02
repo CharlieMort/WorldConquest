@@ -31,7 +31,6 @@ public class GameMasterScript : MonoBehaviour
     private GameSetupScript gameSetupScript;
 
     private int[] Owned = {0, 0, 0, 0};
-    public Sprite[] playerIcons;
 
     private void Awake()
     {
@@ -55,27 +54,10 @@ public class GameMasterScript : MonoBehaviour
         TroopSelectScript = GetComponent<TroopSelectScript>();
         gameSetupScript = GetComponent<GameSetupScript>();
 
-        if (PlayerInfoStaticScript.gameType == "pvp" || PlayerInfoStaticScript.gameType == "pve")
-        {
-            Invoke("GameStart", 2f);
-        }
     }
 
     public void GameStart()
     {
-        try
-        {
-            for (int i = 0; i < playerArr.Length; i++)
-            {
-                playerArr[i].playerSprite = playerIcons[PlayerInfoStaticScript.playerIconIdxs[i]];
-                playerArr[i].playerName = PlayerInfoStaticScript.playerNames[i];
-                playerArr[i].UpdatePlayerIcon();
-            }
-        } catch
-        {
-            print(PlayerInfoStaticScript.playerNames[0]);
-        }
-        
         gameSetupScript.AutoSetup(countryArr, playerArr.Length);
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
