@@ -12,6 +12,11 @@ public class PlayerScript : MonoBehaviour
 
     private int[] cardsArr = new int[3] { 0, 0, 0 };
 
+    public void Kill()
+    {
+        playerUI.transform.Find("Dead").gameObject.SetActive(true);
+    }
+
     private void Start()
     {
         playerUI.transform.Find("Background").GetComponent<Image>().color = playerColor;

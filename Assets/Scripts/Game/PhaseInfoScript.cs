@@ -68,6 +68,7 @@ public class PhaseInfoScript : MonoBehaviour
         }
 
         Transform currPlayer = PlayerIcons.transform.GetChild(GameMasterScript.Instance.getPlayersTurn());
+
         PlayerIcons.transform.GetChild(PlayerIcons.transform.childCount - 1).localPosition = currPlayer.localPosition + Vector3.right*25;
         currPlayer.localPosition = new Vector3(
                 -50,

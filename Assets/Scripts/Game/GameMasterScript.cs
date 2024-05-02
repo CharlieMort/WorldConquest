@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GAME_STATE
 {
@@ -19,6 +22,7 @@ public class GameMasterScript : MonoBehaviour
     private int playersTurn = 0;
     private PlayerScript[] playerArr;
     private CountryScript[] countryArr;
+    public GameObject winScreen;
 
     public CardHandlerScript CardHandlerScript;
     public SelectionHandler SelectionHandler;
@@ -101,11 +105,20 @@ public class GameMasterScript : MonoBehaviour
         
         playersTurn++;
         if (playersTurn == playerArr.Length) playersTurn = 0;
-
+        int deadCounter = 0;
         while (Owned[playersTurn] == 0)
         {
+            deadCounter++;
+            playerArr[playersTurn].Kill();
             playersTurn++;
             if (playersTurn == playerArr.Length) playersTurn = 0;
+        }
+        if (deadCounter == playerArr.Length - 1)
+        {
+            Win(playerArr[playersTurn]);
+            ActionAfterPhaseChange = null;
+            ActionAfterTurnChange = null;
+            return;
         }
         print("PLAYER TURN == " + playersTurn);
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
@@ -126,5 +139,17 @@ public class GameMasterScript : MonoBehaviour
         //print(Owned[2]);
         //print(Owned[3]);
 
+    }
+
+    public void Win(PlayerScript winner)
+    {
+        winScreen.SetActive(true);
+        winScreen.transform.Find("PlayerIcon").GetComponent<Image>().sprite = winner.playerSprite;
+        winScreen.transform.Find("WinnerText").GetComponent<TextMeshProUGUI>().text = winner.playerName + " won !!!";
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
