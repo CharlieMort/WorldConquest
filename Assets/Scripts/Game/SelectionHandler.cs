@@ -29,7 +29,7 @@ public class SelectionHandler : MonoBehaviour
     public void SetSelect1(GameObject country)
     {
         // select1 = country;
-        // print(select1.name);
+        // //print(select1.name);
         if (ActionAfterCountrySelect1 != null) ActionAfterCountrySelect1(country);
     }
 

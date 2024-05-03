@@ -20,55 +20,59 @@ public class CardHandlerScript : MonoBehaviour
 
     public void ShowGUI()
     {
-        toggleButton.transform.GetChild(0).gameObject.SetActive(false);
-        toggleButton.transform.GetChild(1).gameObject.SetActive(true);
-        gameObject.SetActive(true);
-        foreach(Image card in cards.GetComponentsInChildren<Image>())
+        if (GameMasterScript.Instance.getGameState() == GAME_STATE.DRAFT)
         {
-            card.color = Color.black;
-        }
-        PlayerScript player = GameMasterScript.Instance.GetCurrentPlayer();
-        int[] cardArr = player.GetCardsArr();
-        iCardText.text = cardArr[0].ToString();
-        cCardText.text = cardArr[1].ToString();
-        aCardText.text = cardArr[2].ToString();
-
-        canRedeem = false;
-        if (cardArr[0] > 0 && cardArr[1] > 0 && cardArr[2] > 0)
-        {
-            canRedeem = true;
-            Image[] cardImgs = cards.GetComponentsInChildren<Image>();
-            for (int i = 0; i<cardArr.Length; i++)
+            toggleButton.transform.GetChild(0).gameObject.SetActive(false);
+            toggleButton.transform.GetChild(1).gameObject.SetActive(true);
+            gameObject.SetActive(true);
+            foreach (Image card in cards.GetComponentsInChildren<Image>())
             {
-                cardImgs[i].sprite = cardSprites[i];
+                card.color = Color.black;
             }
-        } else
-        {
-            for (int i = 0; i < cardArr.Length; i++)
+            PlayerScript player = GameMasterScript.Instance.GetCurrentPlayer();
+            int[] cardArr = player.GetCardsArr();
+            iCardText.text = cardArr[0].ToString();
+            cCardText.text = cardArr[1].ToString();
+            aCardText.text = cardArr[2].ToString();
+
+            canRedeem = false;
+            if (cardArr[0] > 0 && cardArr[1] > 0 && cardArr[2] > 0)
             {
-                if (cardArr[i] >= 3)
+                canRedeem = true;
+                Image[] cardImgs = cards.GetComponentsInChildren<Image>();
+                for (int i = 0; i < cardArr.Length; i++)
                 {
-                    canRedeem = true;
-                    foreach (Image card in cards.GetComponentsInChildren<Image>())
-                    {
-                        card.sprite = cardSprites[i];
-                        card.color = Color.white;
-                    }
-                    break;
+                    cardImgs[i].sprite = cardSprites[i];
                 }
             }
-        }
-        if (canRedeem)
-        {
-            transform.Find("Redeem").GetComponent<Button>().interactable = true;
-            transform.Find("Redeem").GetChild(0).GetComponent<TextMeshProUGUI>().text = "redeem " + cardBonus;
-        }
-        else
-        {
-            transform.Find("Redeem").GetComponent<Button>().interactable = false;
-            TextMeshProUGUI redeemTxt = transform.Find("Redeem").GetChild(0).GetComponent<TextMeshProUGUI>();
-            redeemTxt.text = "redeem 0";
-            redeemTxt.color = new Color(redeemTxt.color.r, redeemTxt.color.g, redeemTxt.color.b, 165f);
+            else
+            {
+                for (int i = 0; i < cardArr.Length; i++)
+                {
+                    if (cardArr[i] >= 3)
+                    {
+                        canRedeem = true;
+                        foreach (Image card in cards.GetComponentsInChildren<Image>())
+                        {
+                            card.sprite = cardSprites[i];
+                            card.color = Color.white;
+                        }
+                        break;
+                    }
+                }
+            }
+            if (canRedeem)
+            {
+                transform.Find("Redeem").GetComponent<Button>().interactable = true;
+                transform.Find("Redeem").GetChild(0).GetComponent<TextMeshProUGUI>().text = "redeem " + cardBonus;
+            }
+            else
+            {
+                transform.Find("Redeem").GetComponent<Button>().interactable = false;
+                TextMeshProUGUI redeemTxt = transform.Find("Redeem").GetChild(0).GetComponent<TextMeshProUGUI>();
+                redeemTxt.text = "redeem 0";
+                redeemTxt.color = new Color(redeemTxt.color.r, redeemTxt.color.g, redeemTxt.color.b, 165f);
+            }
         }
     }
 

@@ -120,7 +120,7 @@ public class FortifyHandlerScript : MonoBehaviour
     public void OnCountrySelect(GameObject c)
     {
         CountryScript cs = c.GetComponent<CountryScript>();
-        print(cs.name);
+        //print(cs.name);
         if (fromCountry == null)
         {
             bool found = false;

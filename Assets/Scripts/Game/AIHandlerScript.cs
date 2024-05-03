@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class AIHandlerScript : MonoBehaviour
@@ -102,17 +101,22 @@ public class AIHandlerScript : MonoBehaviour
 
     void Draft()
     {
-        print("DRAFT PHASE :" + GameMasterScript.Instance.getPlayersTurn());
+        //print("DRAFT PHASE :" + GameMasterScript.Instance.getPlayersTurn());
+        if (GameMasterScript.Instance.GetCurrentPlayer().GetNumOfCards() >= 5)
+        {
+            GameMasterScript.Instance.CardHandlerScript.ShowGUI();
+            GameMasterScript.Instance.CardHandlerScript.Redeem();
+        }
         dhs.SelectCountry(GetRandomOwnedCountry().gameObject);
         dhs.AddTroops(dhs.remainingTroops);
-        print(dhs.remainingTroops);
+        //print(dhs.remainingTroops);
         tss.Hide();
         GameMasterScript.Instance.NextPhaseMethod();
     }
 
     void Attack()
     {
-        print("ATTACK PHASE");
+        //print("ATTACK PHASE");
         int numOfAttacks = Random.Range(1, 10);
         for (int k = 0; k < numOfAttacks; k++)
         {
@@ -156,7 +160,7 @@ public class AIHandlerScript : MonoBehaviour
     int attackCounter = 0;
     void AttackWithDice()
     {
-        print("ATTACK PHASE");
+        //print("ATTACK PHASE");
 
         if (attackCounter < maxAttacks)
         {
@@ -213,7 +217,7 @@ public class AIHandlerScript : MonoBehaviour
 
     void Fortify()
     {
-        print("FORIFY PHASE LOL");
+        //print("FORIFY PHASE LOL");
         GameMasterScript.Instance.NextPhaseMethod();
     }
 }

@@ -13,13 +13,13 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        print("Click" + transform.parent.name);
+        //print("Click" + transform.parent.name);
         GameMasterScript.Instance.SelectionHandler.SelectCountry(transform.parent.gameObject); // will error if not a country
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-       //print("Release");
+       ////print("Release");
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -29,11 +29,11 @@ public class EventClick : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        //print("Hover");
+        ////print("Hover");
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //print("Stop Hover");
+        ////print("Stop Hover");
     }
 }

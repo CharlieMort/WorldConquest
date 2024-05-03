@@ -76,13 +76,13 @@ public class AttackHandlerScript : MonoBehaviour
     public void SelectCountry(GameObject country)
     {
         CountryScript cs = country.GetComponent<CountryScript>();
-        print(cs.name);
+        //print(cs.name);
         if (attackingCountry == null)
         {
             if (cs.ownerID == GameMasterScript.Instance.getPlayersTurn() && cs.troopCount > 1)
             {
                 attackingCountry = cs;
-                print("ATTACKER");
+                //print("ATTACKER");
                 attackableCountrys = cs.neighbourArr;
                 foreach (CountryScript c in GameMasterScript.Instance.getAllCountries())
                 {
@@ -100,7 +100,7 @@ public class AttackHandlerScript : MonoBehaviour
             }
             else
             {
-                print("REJECTED OWNER ID: " + cs.ownerID + " != " + GameMasterScript.Instance.getPlayersTurn());
+                //print("REJECTED OWNER ID: " + cs.ownerID + " != " + GameMasterScript.Instance.getPlayersTurn());
             }
         }
         else
@@ -108,7 +108,7 @@ public class AttackHandlerScript : MonoBehaviour
             if (attackableCountrys.Contains(cs) && cs.ownerID != GameMasterScript.Instance.getPlayersTurn())
             {
                 defendingCountry = cs;
-                print("DEFENDER");
+                //print("DEFENDER");
                 attackUI.SetActive(true);
                 attackUI.transform.GetChild(0).gameObject.SetActive(true);
                 attackUI.transform.GetChild(1).gameObject.SetActive(true);

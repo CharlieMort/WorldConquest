@@ -49,7 +49,7 @@ public class GameMasterScript : MonoBehaviour
         List<CountryScript> temp = new List<CountryScript>();
         temp.AddRange(transform.Find("Continents").GetComponentsInChildren<CountryScript>());
         countryArr = temp.ToArray();
-        //print(countryArr.Length);
+        ////print(countryArr.Length);
 
         SelectionHandler = GetComponent<SelectionHandler>();
         TroopSelectScript = GetComponent<TroopSelectScript>();
@@ -74,7 +74,7 @@ public class GameMasterScript : MonoBehaviour
         }
         catch
         {
-            print(PlayerInfoStaticScript.playerNames[0]);
+            //print(PlayerInfoStaticScript.playerNames[0]);
         }
 
         gameSetupScript.AutoSetup(countryArr, playerArr.Length);
@@ -110,7 +110,7 @@ public class GameMasterScript : MonoBehaviour
                 break;
             case GAME_STATE.FORTIFY:
                 gameState = GAME_STATE.DRAFT;
-                print("Next turn");
+                //print("Next turn");
                 NextTurn();
                 break;
         }
@@ -139,7 +139,7 @@ public class GameMasterScript : MonoBehaviour
             ActionAfterTurnChange = null;
             return;
         }
-        print("PLAYER TURN == " + playersTurn);
+        //print("PLAYER TURN == " + playersTurn);
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
 
@@ -153,10 +153,10 @@ public class GameMasterScript : MonoBehaviour
         {
             Owned[co.ownerID]++;
         }
-        //print(Owned[0]);
-        //print(Owned[1]);
-        //print(Owned[2]);
-        //print(Owned[3]);
+        ////print(Owned[0]);
+        ////print(Owned[1]);
+        ////print(Owned[2]);
+        ////print(Owned[3]);
 
     }
 
