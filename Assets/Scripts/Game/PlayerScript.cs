@@ -17,8 +17,9 @@ public class PlayerScript : MonoBehaviour
         playerUI.transform.Find("Dead").gameObject.SetActive(true);
     }
 
-    private void Start()
+    public void UpdatePlayerIcon()
     {
+        playerUI.transform.Find("Icon").GetComponent<Image>().sprite = playerSprite;
         playerUI.transform.Find("Background").GetComponent<Image>().color = playerColor;
     }
 

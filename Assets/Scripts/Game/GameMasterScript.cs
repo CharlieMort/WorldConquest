@@ -30,7 +30,8 @@ public class GameMasterScript : MonoBehaviour
     public DiceHandlerScript DiceHandlerScript;
     private GameSetupScript gameSetupScript;
 
-    private int[] Owned = {0, 0, 0, 0};
+    private int[] Owned = { 0, 0, 0, 0 };
+    public Sprite[] playerIcons;
 
     private void Awake()
     {
@@ -54,10 +55,28 @@ public class GameMasterScript : MonoBehaviour
         TroopSelectScript = GetComponent<TroopSelectScript>();
         gameSetupScript = GetComponent<GameSetupScript>();
 
+        if (PlayerInfoStaticScript.gameType == "pvp" || PlayerInfoStaticScript.gameType == "pve")
+        {
+            Invoke("GameStart", 2f);
+        }
     }
 
     public void GameStart()
     {
+        try
+        {
+            for (int i = 0; i < playerArr.Length; i++)
+            {
+                playerArr[i].playerSprite = playerIcons[PlayerInfoStaticScript.playerIconIdxs[i]];
+                playerArr[i].playerName = PlayerInfoStaticScript.playerNames[i];
+                playerArr[i].UpdatePlayerIcon();
+            }
+        }
+        catch
+        {
+            print(PlayerInfoStaticScript.playerNames[0]);
+        }
+
         gameSetupScript.AutoSetup(countryArr, playerArr.Length);
         if (ActionAfterTurnChange != null) ActionAfterTurnChange();
     }
@@ -73,7 +92,7 @@ public class GameMasterScript : MonoBehaviour
 
     public GAME_STATE getGameState() { return gameState; }
 
-    public int getPlayersTurn() {  return playersTurn; }
+    public int getPlayersTurn() { return playersTurn; }
 
     public Action ActionAfterPhaseChange;
     public Action ActionBeforePhaseChange;
@@ -81,7 +100,7 @@ public class GameMasterScript : MonoBehaviour
     {
         if (ActionBeforePhaseChange != null) ActionBeforePhaseChange();
 
-        switch(gameState)
+        switch (gameState)
         {
             case GAME_STATE.DRAFT:
                 gameState = GAME_STATE.ATTACK;
@@ -102,7 +121,7 @@ public class GameMasterScript : MonoBehaviour
     public void NextTurn()
     {
         UpdateCountriesOwned();
-        
+
         playersTurn++;
         if (playersTurn == playerArr.Length) playersTurn = 0;
         int deadCounter = 0;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AIHandlerScript : MonoBehaviour
 {
     public bool useAllAI = false;
-    public bool useAI = true;
+    public bool useAI = false;
     private DraftHandlerScript dhs;
     private AttackHandlerScript ahs;
     private FortifyHandlerScript fhs;
@@ -19,7 +19,7 @@ public class AIHandlerScript : MonoBehaviour
     {
         int currentPlayer = GameMasterScript.Instance.getPlayersTurn();
         List<CountryScript> countries = new List<CountryScript>();
-        foreach(CountryScript c in GameMasterScript.Instance.getAllCountries())
+        foreach (CountryScript c in GameMasterScript.Instance.getAllCountries())
         {
             if (c.ownerID == currentPlayer)
             {
@@ -51,7 +51,10 @@ public class AIHandlerScript : MonoBehaviour
         ahs = GameMasterScript.Instance.GetComponent<AttackHandlerScript>();
         fhs = GameMasterScript.Instance.GetComponent<FortifyHandlerScript>();
         tss = GameMasterScript.Instance.TroopSelectScript;
-        
+
+        if (PlayerInfoStaticScript.gameType == "eve") useAllAI = true;
+        else if (PlayerInfoStaticScript.gameType == "pve") useAI = true;
+
         if (useAllAI)
         {
             GameMasterScript.Instance.DiceHandlerScript.skipAnim = true;
@@ -111,7 +114,7 @@ public class AIHandlerScript : MonoBehaviour
     {
         print("ATTACK PHASE");
         int numOfAttacks = Random.Range(1, 10);
-        for (int k = 0; k<numOfAttacks; k++)
+        for (int k = 0; k < numOfAttacks; k++)
         {
             CountryScript attackingCountry = null;
             CountryScript defendingCountry = null;
